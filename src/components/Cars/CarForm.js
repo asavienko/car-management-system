@@ -21,6 +21,10 @@ const CarForm = ({ onFormFinish, form, loading, onValuesChange, name }) => {
             required: true,
             message: "Please input car's brand!",
           },
+          {
+            pattern: /^[a-zA-Z -]*$/,
+            message: 'Use only alphabetic characters, "-" and spaces.',
+          },
         ]}
       >
         <Input />
@@ -28,7 +32,13 @@ const CarForm = ({ onFormFinish, form, loading, onValuesChange, name }) => {
       <Form.Item
         label="Model"
         name="model"
-        rules={[{ required: true, message: "Please input car's model!" }]}
+        rules={[
+          { required: true, message: "Please input car's model!" },
+          {
+            pattern: /^[a-zA-Z -]*$/,
+            message: 'Use only alphabetic characters, "-" and spaces.',
+          },
+        ]}
       >
         <Input />
       </Form.Item>
@@ -46,7 +56,13 @@ const CarForm = ({ onFormFinish, form, loading, onValuesChange, name }) => {
       <Form.Item
         label="Number"
         name="carNumber"
-        rules={[{ required: true, message: "Please input car's number!" }]}
+        rules={[
+          { required: true, message: "Please input car's number!" },
+          {
+            pattern: /^[\w -]*$/,
+            message: 'Use only alphabetic characters, digits, "-" and spaces.',
+          },
+        ]}
       >
         <Input />
       </Form.Item>
