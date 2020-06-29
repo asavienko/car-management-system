@@ -55,13 +55,13 @@ const Cars = () => {
     form.validateFields().then(() => {
       message.loading({ content: "Loading...", key: "carInformation" });
       updateCar(newValues.id, newValues)
-        .then(({ updatedCar }) => {
+        .then(({ car }) => {
           const updatedCarList = carList.map((storedCar) =>
-            storedCar.id === newValues.id ? updatedCar : storedCar
+            storedCar.id === newValues.id ? car : storedCar
           );
           setCarList(updatedCarList);
           message.success({
-            content: `${updatedCar.brand} ${updatedCar.model} has successfully updated`,
+            content: `${car.brand} ${car.model} has successfully updated`,
             key: "carInformation",
           });
         })
