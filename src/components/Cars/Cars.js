@@ -55,15 +55,13 @@ const Cars = () => {
     form.validateFields().then(() => {
       message.loading({ content: "Loading...", key: "carInformation" });
       updateCar(newValues.id, newValues)
-        .then(({ car }) => {
-          const carListFromStore = [...carList];
-          const index = carListFromStore.findIndex(
-            (item) => item.id === newValues.id
+        .then(({ updatedCar }) => {
+          const updatedCarList = carList.map((storedCar) =>
+            storedCar.id === newValues.id ? updatedCar : storedCar
           );
-          carListFromStore.splice(index, 1, car);
-          setCarList(carListFromStore);
+          setCarList(updatedCarList);
           message.success({
-            content: `${car.brand} ${car.model} has successfully updated`,
+            content: `${updatedCar.brand} ${updatedCar.model} has successfully updated`,
             key: "carInformation",
           });
         })
@@ -77,10 +75,8 @@ const Cars = () => {
   }, 1500);
 
   const deleteCarById = (id) => {
-    const carListFromStore = [...carList];
-    const index = carListFromStore.findIndex((item) => item.id === id);
-    carListFromStore.splice(index, 1);
-    setCarList(carListFromStore);
+    const filteredCarList = carList.filter((item) => item.id !== id);
+    setCarList(filteredCarList);
   };
 
   return (

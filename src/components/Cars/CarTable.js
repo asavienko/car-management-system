@@ -11,6 +11,15 @@ const CarTable = ({
   deleteCarById,
   setListLoading,
 }) => {
+  const onDelete = (event, id) => {
+    event.stopPropagation();
+    setListLoading(true);
+    deleteCar(id)
+      .then(() => deleteCarById(id))
+      .catch(() => message.error("Something went wrong"))
+      .finally(() => setListLoading(false));
+  };
+
   const columns = [
     {
       title: "Brand",
@@ -53,17 +62,7 @@ const CarTable = ({
       key: "actions",
       render: (text, { id }) => (
         <Space size="middle">
-          <Button
-            type="link"
-            onClick={(event) => {
-              event.stopPropagation();
-              setListLoading(true);
-              deleteCar(id)
-                .then(() => deleteCarById(id))
-                .catch(() => message.error("Something went wrong"))
-                .finally(() => setListLoading(false));
-            }}
-          >
+          <Button type="link" onClick={(e) => onDelete(e, id)}>
             Delete
           </Button>
         </Space>
