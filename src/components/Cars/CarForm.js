@@ -35,8 +35,8 @@ const CarForm = ({ onFormFinish, form, loading, onValuesChange, name }) => {
         rules={[
           { required: true, message: "Please input car's model!" },
           {
-            pattern: /^[a-zA-Z -]*$/,
-            message: 'Use only alphabetic characters, "-" and spaces.',
+            pattern: /^[\w -]*$/,
+            message: 'Use only alphabetic characters, digits, "-" and spaces.',
           },
         ]}
       >
